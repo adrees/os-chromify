@@ -15,19 +15,45 @@
  *
  */
 
-var  _networkInterface = ['not ready'];
-
-chrome.socket.getNetworkList(function( networkInterfaces ){
-	console.log( networkInterfaces )
-		_networkInterface = networkInterfaces; 
-}); 
-			
 var os = module.exports;
+var _networkInterfaces;
 
+var regIPv4 = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))/;
 
 os.networkInterfaces = function(){
-	return _networkInterface;
+	return _networkInterfaces;
 }
+
+
+
+chrome.socket.getNetworkList( onNetworkList );
+
+function onNetworkList( networkInterfaces ) {
+	_networkInterfaces = {};
+	networkInterfaces.forEach( function( nInterface ) {
+		addInterface( nInterface.name, nInterface.address );
+	});
+};
+
+function addInterface( name, address ) {
+	if ( !( name in _networkInterfaces ) ) {
+		_networkInterfaces[ name ] = [];	
+	}
+	_networkInterfaces[ name ].push( {
+		address: address,
+	       	family: getAddressFamily( address ), 
+		internal: false
+	});
+
+};
+
+function getAddressFamily( address ) {
+	if ( address.match( regIPv4 ) ) {
+		return 'IPv4';
+	}else{
+		return 'IPv6';
+	}
+};
 
 
 ;['tmpDir'
