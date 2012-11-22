@@ -1,4 +1,4 @@
-
+//TODO: CreateTarget in Grunt.js, build npm package, link into node_modules
 /*
 { lo0: 
    [ { address: '::1', family: 'IPv6', internal: true },
@@ -15,10 +15,18 @@
  *
  */
 
+var  _networkInterface = ['not ready'];
+
+chrome.socket.getNetworkList(function( networkInterfaces ){
+	console.log( networkInterfaces )
+		_networkInterface = networkInterfaces; 
+}); 
+			
 var os = module.exports;
 
+
 os.networkInterfaces = function(){
-	return ['soon to contain']
+	return _networkInterface;
 }
 
 
@@ -33,8 +41,9 @@ os.networkInterfaces = function(){
 ,'totalmem'
 ,'freemem'
 ,'cpus'
-'EOL'].forEach(function (name) {
-  exports[name] = function () {
+,'EOL'].forEach(function (name) {
+  os[name] = function () {
     console.error('sorry,' + name + 'is not implemented yet' );
   }
 })
+
