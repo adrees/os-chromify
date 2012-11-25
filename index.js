@@ -32,7 +32,7 @@ var getAddressFamily = function( address ) {
 
 os.networkInterfaces = function(){
 	return _networkInterfaces;
-}
+};
 
 chrome.socket.getNetworkList( onNetworkList );
 
@@ -51,4 +51,4 @@ chrome.socket.getNetworkList( onNetworkList );
   exports[name] = function () {
     console.error('sorry,' + name + 'is not implemented yet' );
   }
-})
+});
