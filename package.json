@@ -1,16 +1,25 @@
 {
   "name": "os-chromify",
-  "version": "0.0.0",
-  "description": "wrapper for os module for packaged chrome apps",
+  "version": "0.0.1",
+  "description": "OS Wrapper for packaged chrome apps",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": "",
+  "repository": {
+	"type": "git", 
+	"url": "https://github.com/adrees/os-chromify.git"
+	},
   "keywords": [
     "os",
-    "chromify"
+    "chromify",
+    "chrome"
   ],
-  "author": "Adam Rees",
+  "devDependencies" : {
+	"browserify" : "1.16.x"
+	},
+  "author": {
+	"name" : "Adam Rees",
+	  "url" : "https://github.com/adrees/os-chromify/issues",
+	  "email" : "adamgrees+os-chromify@gmail.com"
+	},
   "license": "BSD"
+
 }
