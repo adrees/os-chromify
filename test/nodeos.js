@@ -1,3 +1,7 @@
+/**
+ * These are the Core OS methods for comparison
+ */
+
 var os = require('os');
 
 ;['tmpDir'
