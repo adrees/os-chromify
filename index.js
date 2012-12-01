@@ -42,11 +42,14 @@ chrome.socket.getNetworkList( onNetworkList );
 ,'type'
 ,'platform'
 ,'arch'
+// chrome.experimental.systemInfo.cpu.get(function(e){ console.log( e.archName )})
 ,'release'
 ,'uptime'
 ,'loadavg'
 ,'totalmem'
+//chrome.experimental.systemInfo.memory.get(function(e){ console.log(e.capacity)})
 ,'freemem'
+//chrome.experimental.systemInfo.memory.get(function(e){ console.log(e.availableCapacity)})
 ,'cpus'
 ,'EOL'].forEach(function (name) {
   os[name] = function () {
