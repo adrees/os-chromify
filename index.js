@@ -1,5 +1,9 @@
 var os = module.exports;
 var _networkInterfaces;
+var _totalmem;
+var _freemem;
+var _arch;
+
 var regIPv4 = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))/;
 
 var onNetworkList = function( networkInterfaces ) {
@@ -18,7 +22,6 @@ var addInterface = function( name, address ) {
 	       	family: getAddressFamily( address ), 
 		internal: false
 	});
-
 };
 
 var getAddressFamily = function( address ) {
@@ -29,31 +32,40 @@ var getAddressFamily = function( address ) {
 	}
 };
 
-
-os.networkInterfaces = function(){
-	return _networkInterfaces;
+var onMemoryInfo = function( memInfo ){
+	_totalmem = memInfo.capacity;	
+	_freemem = memInfo.availableCapacity;	
 }
-// This is async in Chrome so it's called on init
+
+var onCpuInfo = function( cpuInfo ){
+	_arch = cpuInfo.archName;
+}
+
+chrome.experimental.systemInfo.memory.get( onMemoryInfo );
+chrome.experimental.systemInfo.cpu.get( onCpuInfo );
 chrome.socket.getNetworkList( onNetworkList );
 
 
-;['tmpDir'
-,'hostname'
-,'type'
-,'platform'
-,'arch'
-// chrome.experimental.systemInfo.cpu.get(function(e){ console.log( e.archName )})
-,'release'
-,'uptime'
-,'loadavg'
-,'totalmem'
-//chrome.experimental.systemInfo.memory.get(function(e){ console.log(e.capacity)})
-,'freemem'
-//chrome.experimental.systemInfo.memory.get(function(e){ console.log(e.availableCapacity)})
-,'cpus'
-,'EOL'].forEach(function (name) {
+os.networkInterfaces = function(){
+	return _networkInterfaces;
+};
+
+os.totalmem = function(){
+	return _totalmem;
+}
+
+os.freemem = function(){
+	return _freemem;
+}
+
+os.arch = function() {
+	return _arch;
+}
+
+var unimplemented = ['tmpDir' ,'hostname' ,'type' ,'platform' ,'release' ,'uptime' ,'loadavg' ,'cpus' ,'EOL']
+unimplemented.forEach(function (name) {
   os[name] = function () {
-    console.error('sorry,' + name + 'is not implemented yet' );
+    console.error('sorry, ' + name + ' is not implemented yet' );
   }
 })
 
