@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "OS-Chromify Test",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "test os-chromify in Chrome App",
+    "description": "The description of the application"
+  }
+}

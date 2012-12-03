@@ -13,7 +13,8 @@
     "chrome"
   ],
   "devDependencies" : {
-	"browserify" : "1.16.x"
+	"browserify" : "1.16.x",
+	"grunt-browserify": "git://github.com/bancek/grunt-browserify"
 	},
   "author": {
 	"name" : "Adam Rees",
@@ -21,5 +22,4 @@
 	  "email" : "adamgrees+os-chromify@gmail.com"
 	},
   "license": "BSD"
-
 }

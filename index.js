@@ -35,11 +35,11 @@ var getAddressFamily = function( address ) {
 var onMemoryInfo = function( memInfo ){
 	_totalmem = memInfo.capacity;	
 	_freemem = memInfo.availableCapacity;	
-}
+};
 
 var onCpuInfo = function( cpuInfo ){
 	_arch = cpuInfo.archName;
-}
+};
 
 chrome.experimental.systemInfo.memory.get( onMemoryInfo );
 chrome.experimental.systemInfo.cpu.get( onCpuInfo );
@@ -52,20 +52,20 @@ os.networkInterfaces = function(){
 
 os.totalmem = function(){
 	return _totalmem;
-}
+};
 
 os.freemem = function(){
 	return _freemem;
-}
+};
 
 os.arch = function() {
 	return _arch;
-}
+};
 
 var unimplemented = ['tmpDir' ,'hostname' ,'type' ,'platform' ,'release' ,'uptime' ,'loadavg' ,'cpus' ,'EOL']
 unimplemented.forEach(function (name) {
   os[name] = function () {
     console.error('sorry, ' + name + ' is not implemented yet' );
-  }
-})
+  };
+});
 
