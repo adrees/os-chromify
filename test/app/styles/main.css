@@ -1,1 +1,12 @@
-/* Will be compiled down to a single stylesheet with your sass files */
+table {
+ color:red;
+}
+
+th{
+	color:black;
+	text-align:left;
+}
+
+.pass{
+  color:green;
+}

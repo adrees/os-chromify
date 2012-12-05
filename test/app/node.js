@@ -462,7 +462,9 @@ os.arch = function() {
 var unimplemented = ['tmpDir' ,'hostname' ,'type' ,'platform' ,'release' ,'uptime' ,'loadavg' ,'cpus' ,'EOL']
 unimplemented.forEach(function (name) {
   os[name] = function () {
-    console.error('sorry, ' + name + ' is not implemented yet' );
+	 var msg = 'sorry, ' + name + ' is not implemented yet';
+	 console.error( msg );
+	 throw( msg );  
   };
 });
 
